@@ -1,0 +1,41 @@
+.main__container {
+    margin: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    gap: 3rem;
+}
+
+.img__container {
+    padding: 2rem;
+}
+
+.content__container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 70%;
+}
+
+.card__title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #b85e6a;
+}
+
+.card__description {
+    text-wrap: wrap;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 320px) and (max-width: 627px) {
+    .img__container {
+        display: none;
+    }
+}

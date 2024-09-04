@@ -1,0 +1,41 @@
+    .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: #B75D69;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        margin-top: 2rem;
+        font-size: 1.8rem;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    a {
+        color: #B75D69;
+        text-decoration: none;
+    }
+
+    ul {
+        margin-left: 1.5rem;
+        list-style-type: disc;
+    }
+
+    .last-updated {
+        text-align: right;
+        font-size: 0.9rem;
+        color: #777;
+    }

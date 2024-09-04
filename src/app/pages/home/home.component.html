@@ -1,0 +1,52 @@
+<app-header />
+<main>
+  <section>
+    <div class="main__container">
+      <div class="main__message">
+        <h1>Crie <span style="color: #B75D69;">lembretes</span> ou programe <span style="color: #B75D69;">e-mails</span> para você mesmo!</h1>
+      </div>
+      <div class="main__img">
+        <img src="assets/undraw_reminder_re_fe15.svg" alt="Ilustração de um celular e uma mulher ao lado">
+      </div>
+    </div>
+  </section>
+
+  <section class="description__container">
+    <article class="article__content">
+        <h1>Como funciona?</h1>
+        <div>
+          <p>
+            Seja para lembrar de uma tarefa, um compromisso, datas importantes ou até mesmo enviar uma carta para você do futuro. O Me Lembra Ai é a ferramenta ideal para você e o melhor, de forma gratuita.
+          </p>
+        </div>
+    </article>
+    <article>
+        <app-card title="Prático e rápido" content="Basta se cadastrar, ativar sua conta e em alguns cliques seu email automatico estará programado para ser enviado da maneira que você definir." imgSrc="assets/fast.svg"/>
+        <app-card 
+            title="Totalmente Personalizável"
+            content="Defina o que você quer lembrar. Pode ser um aniversário, um compromisso, uma carta motivacional ou até mesmo uma mensagem para o seu 'eu' futuro."
+            imgSrc="assets/custom.svg" [reversed]="true"/>
+        <app-card 
+            title="Ideal para Qualquer Situação"
+            content="Seja para lembrar de uma consulta médica, uma conta a pagar ou até para enviar uma mensagem motivacional, o Me Lembra Ai é perfeito para qualquer momento."
+            imgSrc="assets/all.svg"/>
+
+        <app-card title="Respeitamos sua privacidade" content="O conteúdo escrito no email estará decodificado em nosso banco de dados, dessa forma o conteúdo original só é mostrado no email enviado a você" imgSrc="assets/private.svg" [reversed]="true"/>
+        <div>
+        <div class="main__container">
+      <div class="main__message">
+        <h1>Pronto para Testar?</h1>
+      </div>
+      <div class="main__img">
+        <a href="/register">
+          <p-button label="Registrar" rounded pRipple class="btn btn--register"/>
+        </a>
+      </div>
+    </div>
+        </div>
+    </article>
+  </section>
+  <section>
+  </section>
+</main>
+<app-footer />

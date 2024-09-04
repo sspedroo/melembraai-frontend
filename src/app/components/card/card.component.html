@@ -1,0 +1,21 @@
+<article>
+   <div class="main__container">
+    @if (!reversed) {
+        <div class="img__container">
+            <img class="card__img" [src]="imgSrc" alt="Placeholder" width="450" height="250">
+        </div>
+        <div class="content__container">
+            <h2 class="card__title">{{ title }}</h2>
+            <p class="card__description">{{ content }}</p> 
+        </div>
+    } @else {
+        <div class="content__container">
+            <h2 class="card__title">{{ title }}</h2>
+            <p class="card__description">{{ content }}</p> 
+        </div>
+        <div class="img__container">
+            <img class="card__img" [src]="imgSrc" alt="Placeholder" width="450" height="250">
+        </div>
+    }
+   </div>
+</article>
