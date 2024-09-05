@@ -1,0 +1,51 @@
+<app-header />
+<section class="main__section">
+    <div>
+        <h1>Dúvidas ou sugestões?</h1>
+        <p>Entre em contato através do email</p>
+    </div>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="form__wrapper">
+            <div class="form__content">
+                <label for="name">Nome</label>
+                <input type="text" placeholder="Digite seu nome" id="name" name="name" formControlName="name" required>
+                @if (contactForm.controls.name.touched && contactForm.controls.name.value === '') {
+                <small class="error__content">Nome não pode ser vazio</small>
+            }
+            </div>
+            
+
+            <div class="form__content">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Digite seu e-mail" formControlName="email" required>
+                @if (contactForm.controls.email.touched && contactForm.controls.email.dirty && contactForm.controls.email.invalid && contactForm.controls.email.errors?.['email']) {
+                    <small class="error__content">Digite um email válido.</small>
+                }
+                @if (contactForm.controls.email.touched && contactForm.controls.email.value === '') {
+                    <small class="error__content">Email não pode ser vazio.</small>
+                }
+            </div>
+
+            <div class="form__content">
+                <label for="textarea">Dúvida ou Sugestão</label>
+                <textarea name="textarea" id="textarea" cols="30" rows="10" placeholder="Ex: Como posso excluir minha conta..." formControlName="message" required></textarea>
+                @if (contactForm.controls.message.touched && contactForm.controls.message.value === '') {
+                    <small class="error__content">Mensagem não pode ser vazia.</small>
+                }
+            </div>
+
+            @if (contactForm.valid) {
+                <p-button label="Enviar" rounded (onClick)="onSubmit()"/>
+            } @else {
+                <p-button label="Enviar" rounded disabled />
+            }
+        </div>
+    </form>
+    @if (showSuccess) {
+    <div class="success__message">
+        <p>Sua mensagem foi enviada com sucesso!</p>
+    </div>
+}
+</section>
+
+<app-footer />
