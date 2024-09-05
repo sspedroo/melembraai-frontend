@@ -5,6 +5,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import localePt from '@angular/common/locales/pt';
 import { HeaderComponent } from "./shared/header/header.component";
 import { HomeComponent } from "./pages/home/home.component";
+import { InfiniteCarouselComponent } from "./components/infinite-carousel/infinite-carousel.component";
 
 
 registerLocaleData(localePt);
@@ -12,7 +13,7 @@ registerLocaleData(localePt);
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, HomeComponent],
+  imports: [RouterOutlet, HeaderComponent, HomeComponent, InfiniteCarouselComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [
