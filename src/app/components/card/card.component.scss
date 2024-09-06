@@ -38,4 +38,14 @@
     .img__container {
         display: none;
     }
+
+    .main__container {
+        margin: 0;
+    }
+
+    .content__container {
+        max-width: 100%;
+        padding: 0;
+        gap: 1rem;
+    }
 }
