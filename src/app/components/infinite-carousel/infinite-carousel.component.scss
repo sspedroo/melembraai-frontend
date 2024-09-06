@@ -41,3 +41,10 @@
         left: calc(var(--width) * -1);
     }
 }
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .slider:hover .item {
+            animation-play-state: running !important;
+        }
+}
