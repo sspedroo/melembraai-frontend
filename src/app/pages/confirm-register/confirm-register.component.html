@@ -1,0 +1,20 @@
+<app-header />
+<section class="main__container">
+    <div class="container__wrapper">
+        <div>
+            <h2>Confirme seu registro</h2>
+            <p>Digite abaixo o código que enviamos no seu email.</p>
+            <p>O código é válido por 24 horas.</p>
+        </div>
+        <div>
+            <input type="text" placeholder="Digite o código" [(ngModel)]="token" required>
+        </div>
+        <div>
+            <p-button label="Confirmar" rounded p-ripple (onClick)="validateEmail(userId, token)"/>
+        </div>
+        <div>
+            <p>Código expirado ou não recebeu o email? <a href="">Enviar email novamente</a></p>
+        </div>
+    </div>
+</section>
+<app-footer />

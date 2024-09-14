@@ -1,0 +1,118 @@
+<body class="body__container">
+    <app-header />
+    <section class="container__wrapper">
+      <h2>Preencha os campos para se registrar</h2>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form__container">
+          <div class="text__input">
+            <label for="name">Nome</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Digite seu nome"
+              formControlName="name"
+            />
+            @if (form.controls.name.touched && form.controls.name.value === '') {
+            <small class="error__content">Nome não pode ser vazio</small>
+            }
+          </div>
+          <div class="text__input">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Digite seu e-mail"
+              formControlName="email"
+            />
+            @if (form.controls.email.touched && form.controls.email.dirty &&
+            form.controls.email.invalid && form.controls.email.errors?.['email']) {
+            <small class="error__content">Digite um email válido.</small>
+            } @if (form.controls.email.touched && form.controls.email.value === '')
+            {
+            <small class="error__content">Email não pode ser vazio.</small>
+            }
+        </div>
+        <div class="password__input">
+            <div class="password__label">
+            <label for="password">Senha</label>
+            @if (hidePassword()) {
+            <button
+                type="button"
+                (mousedown)="showPasswordEvent($event)"
+                (mouseup)="hidePasswordEvent($event)"
+                (mouseout)="hidePasswordEvent($event)"
+            >
+                Ver senha
+            </button>
+            } @else {
+            <button
+                type="button"
+                (mousedown)="clickEvent($event)"
+                (mouseup)="clickEvent($event)"
+                (mouseout)="hidePasswordEvent($event)"
+            >
+                Esconder senha
+            </button>
+            }
+            </div>
+            <div>
+            <input
+                [type]="hidePassword() ? 'password' : 'text'"
+                name="password"
+                id="password"
+                placeholder="Digite sua senha"
+                style="width: 100%"
+                formControlName="password"
+            />
+            @if (form.controls.password.touched && form.controls.password.value === '') {
+            <small class="error__content">Senha não pode ser vazia</small>
+            }
+            @if (form.controls.password.touched && form.controls.password.dirty && form.controls.password.value!.length < 6 && form.controls.password.value !== '') {
+            <small class="error__content">Senha deve ter no mínimo 8 caracteres</small>
+            }
+            </div>
+        </div>
+        <div class="password__input">
+            <div class="password__label">
+            <label for="confirmPassword">Confirme sua senha</label>
+            @if (hideConfirmPassword()) {
+            <button type="button" (click)="clickEvent2($event)">Ver senha</button>
+            } @else {
+            <button type="button" (click)="clickEvent2($event)">
+                Esconder senha
+            </button>
+            }
+            </div>
+            <div>
+            <input
+                [type]="hideConfirmPassword() ? 'password' : 'text'"
+                name="confirmPassword"
+                id="confirmPassword"
+                placeholder="Confirme sua senha"
+                style="width: 100%"
+                formControlName="confirmPassword"
+            />
+            @if (form.controls.confirmPassword.touched && form.controls.confirmPassword.value === '') {
+            <small class="error__content">Confirmação de senha não pode ser vazia</small>
+            }
+            @if (form.controls.confirmPassword.touched && form.controls.confirmPassword.dirty && form.controls.confirmPassword.value!.length < 6 && form.controls.confirmPassword.value !== '') {
+            <small class="error__content">Confirmação de senha deve ter no mínimo 8 caracteres</small>
+            }
+            </div>
+        </div>
+        <div class="warning">
+            <small
+            >Ao se registrar, você concorda com nossos
+            <a href="/terms">Termos e Condições</a>.</small
+            >
+        </div>
+        <div class="cta__button">
+            <p-button label="Registrar" type="submit; $event.preventDefault()" rounded pRipple class="btn btn--login" />
+        </div>
+        </div>
+    </form>
+    </section>
+    <app-footer />
+</body>
