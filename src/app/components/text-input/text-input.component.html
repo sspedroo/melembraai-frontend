@@ -1,0 +1,16 @@
+<div class="text__input">
+  <label for="email">Email</label>
+  <input
+    type="email"
+    name="email"
+    id="email"
+    placeholder="Digite seu e-mail"
+    formControlName="email"
+  />
+  @if (form.controls['email'].touched && form.controls['email'].dirty &&
+  form.controls['email'].invalid && form.controls['email'].errors?.['email']) {
+  <small class="error__content">Digite um email válido.</small>
+  } @if (form.controls['email'].touched && form.controls['email'].value === '') {
+  <small class="error__content">Email não pode ser vazio.</small>
+  }
+</div>

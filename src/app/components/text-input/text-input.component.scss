@@ -1,0 +1,28 @@
+.text__input {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid lime;
+
+    &:has(small) {
+        input {
+            background-color: #ff858579;
+        }
+    }
+}
+
+.error__content {
+    color: red;
+    font-weight: 400;
+}
+
+input {
+    border: 1px solid lightgray;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+label {
+    font-weight: bold;
+}
+
