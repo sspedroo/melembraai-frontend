@@ -35,6 +35,7 @@ export class RegisterComponent {
 
   hidePassword = signal(true);
   hideConfirmPassword = signal(true);
+  errorMessage = signal('');
 
   constructor(private registerService: RegisterService, private http: HttpClient, private router: Router) { }
 
@@ -67,16 +68,22 @@ export class RegisterComponent {
     this.registerService.register(formData as Register).subscribe({
       next: (response: RegisterResponse) => {
         console.log(response);
+        this.form.reset();
         this.router.navigate(['/confirm-email'], { queryParams: { userId: response.id } });
       },
       error: (error: any) => {
-        console.error(error);
+        // Acessar a propriedade "message" dentro do objeto "error"
+        if (error.error && error.error.message) {
+          this.errorMessage.set(error.error.message);
+        } else {
+          console.error('Erro inesperado:', error);
+        }
       },
       complete: () => {
-        // handle complete if needed
+        
       }
     });
 
-    this.form.reset();
+    
   }
 }

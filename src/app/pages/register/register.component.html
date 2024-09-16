@@ -2,6 +2,11 @@
     <app-header />
     <section class="container__wrapper">
       <h2>Preencha os campos para se registrar</h2>
+      @if (errorMessage()) {
+        <div class="error__content">
+            <p>{{ errorMessage() }}</p>
+        </div>
+      }
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form__container">
           <div class="text__input">
@@ -70,7 +75,7 @@
             <small class="error__content">Senha não pode ser vazia</small>
             }
             @if (form.controls.password.touched && form.controls.password.dirty && form.controls.password.value!.length < 6 && form.controls.password.value !== '') {
-            <small class="error__content">Senha deve ter no mínimo 8 caracteres</small>
+            <small class="error__content">Senha deve ter no mínimo 6 caracteres</small>
             }
             </div>
         </div>
@@ -109,7 +114,7 @@
             >
         </div>
         <div class="cta__button">
-            <p-button label="Registrar" type="submit; $event.preventDefault()" rounded pRipple class="btn btn--login" />
+            <p-button label="Registrar" [disabled]="form.invalid" type="submit; $event.preventDefault()" rounded pRipple class="btn btn--login" />
         </div>
         </div>
     </form>

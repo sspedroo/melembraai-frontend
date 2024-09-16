@@ -1,1 +1,68 @@
-<p>login works!</p>
+<body>
+  <section class="main__container">
+    <div class="main__header">
+      <a href="">
+        <h2>Me Lembra Ai</h2>
+      </a>
+    </div>
+    <form [formGroup]="form">
+      <div class="container__wrapper">
+        <div>
+          <h2>Preencha os campos para realizar o login</h2>
+        </div>
+        <div class="form__content">
+          <div class="form__item">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Digite seu e-mail"
+              formControlName="email"
+            />
+            @if (form.controls.email.touched && form.controls.email.dirty &&
+            form.controls.email.invalid && form.controls.email.errors?.['email']) {
+            <small class="error__content">Digite um email válido.</small>
+            } @if (form.controls.email.touched && form.controls.email.value === '')
+            {
+            <small class="error__content">Email não pode ser vazio.</small>
+            }
+          </div> 
+          <div class="form__item">
+            <div class="password__label">
+            <label for="password">Senha</label>
+            @if (hidePassword()) {
+            <button type="button" (click)="clickEvent($event)">Ver senha</button>
+            } @else {
+            <button type="button" (click)="clickEvent($event)">
+                Esconder senha
+            </button>
+            }
+            </div>
+            <input
+              [type]="hidePassword() ? 'password' : 'text'"
+              name="password"
+              id="password"
+              placeholder="Digite sua senha"
+              formControlName="password"
+            />
+            @if (form.controls.password.touched && form.controls.password.value === '') {
+            <small class="error__content">Senha não pode ser vazia</small>
+            }
+            @if (form.controls.password.touched && form.controls.password.dirty && form.controls.password.value!.length < 6 && form.controls.password.value !== '') {
+            <small class="error__content">Senha deve ter no mínimo 6 caracteres</small>
+            }
+          </div>
+          <div>
+            <p-button label="Entrar" [disabled]="form.invalid" rounded pRipple/>
+          </div>
+          <div>
+            <p>Esqueceu sua senha? <a href="">Clique aqui</a></p>
+            <p>Ainda não tem uma conta? <a href="">Criar conta</a></p>
+          </div>
+        </div>
+      </div>
+    </form>
+  </section>
+  <app-footer />
+</body>
