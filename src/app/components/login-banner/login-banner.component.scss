@@ -1,0 +1,19 @@
+// section {
+//     background-color: #252525;
+// }
+
+.main__section {
+    display: flex;
+    
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.banner__img {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
