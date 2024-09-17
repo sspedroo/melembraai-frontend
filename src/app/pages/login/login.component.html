@@ -5,7 +5,7 @@
         <h2>Me Lembra Ai</h2>
       </a>
     </div>
-    <form [formGroup]="form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="container__wrapper">
         <div>
           <h2>Preencha os campos para realizar o login</h2>
@@ -53,8 +53,11 @@
             <small class="error__content">Senha deve ter no mínimo 6 caracteres</small>
             }
           </div>
+          @if (errorMessage()) {
+            <small class="error__content">{{ errorMessage() }}</small>
+          }
           <div>
-            <p-button label="Entrar" [disabled]="form.invalid" rounded pRipple/>
+            <p-button label="Entrar" (onClick)="onSubmit()" [disabled]="form.invalid" rounded pRipple/>
           </div>
           <div>
             <p>Esqueceu sua senha? <a href="">Clique aqui</a></p>

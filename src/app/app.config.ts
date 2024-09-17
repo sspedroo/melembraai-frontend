@@ -7,6 +7,7 @@ import {
   withFetch,
 } from '@angular/common/http';
 import { routes } from './app.routes';
+import { authProvider } from './http-interceptor/auth-provider';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     importProvidersFrom(HttpClientModule),
+    authProvider, // Token Interceptor
   ],
 };

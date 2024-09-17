@@ -5,6 +5,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { FooterComponent } from "../../shared/footer/footer.component";
 import { LoginBannerComponent } from "../../components/login-banner/login-banner.component";
 import { TextInputComponent } from "../../components/text-input/text-input.component";
+import { LoginService } from '../../services/login.service';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +18,12 @@ import { TextInputComponent } from "../../components/text-input/text-input.compo
     ReactiveFormsModule,
     FooterComponent,
     LoginBannerComponent,
-    TextInputComponent
-],
+    TextInputComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-
   form = new FormGroup({
     email: new FormControl('', {
       validators: [Validators.required, Validators.email],
@@ -29,12 +31,43 @@ export class LoginComponent {
     password: new FormControl('', {
       validators: [Validators.required, Validators.minLength(6)],
     }),
-  })
+  });
 
   hidePassword = signal(true);
+  errorMessage = signal('');
+
+  constructor(
+    private loginService: LoginService,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   clickEvent(event: MouseEvent) {
     this.hidePassword.set(!this.hidePassword());
     event.stopPropagation();
+  }
+
+
+  onSubmit() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    this.loginService.login(this.form.value as any)
+    .subscribe({
+        next: (response) => {
+          this.loginService.saveDataInLocalStorage(response);
+          this.router.navigate(['/home']);
+          this.form.reset();
+        },
+        error: (error) => {
+          if (error.error && error.error.body) {
+            this.errorMessage.set(error.error.body.detail);
+          }
+        },
+        complete: () => {
+
+        }
+      })
   }
 }

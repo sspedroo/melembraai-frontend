@@ -6,6 +6,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LoggedHomeComponent } from './pages/logged-home/logged-home.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -15,4 +16,5 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'confirm-email', component: ConfirmRegisterComponent},
+    {path: 'home', component: LoggedHomeComponent},
 ];

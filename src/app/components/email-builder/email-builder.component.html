@@ -1,0 +1,74 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+    <section class="main__container">
+        <div class="email__fields">
+            <div style="padding-left: 1rem;">
+                <h2>Escreva seu email</h2>
+            </div>
+            <div class="email__field" style="width: 100%;">
+                <label for="email-title">Titulo do E-mail</label>
+                <input type="text" id="email-title" name="email-title" formControlName="title">
+            </div>
+            <div class="email__field">
+                <label for="email-message">Mensagem</label>
+                <textarea id="email-message" name="email-message" formControlName="content" cols="80" rows="10"></textarea>
+            </div>
+        </div>
+    
+        <section>
+            <div class="email__options">
+                <div class="email__option">
+                    <label for="email-configuration">Deseja que o email se repita?</label>
+                    <select id="email-configuration" name="email-configuration" formControlName="hasRepetition">
+                        <option value="" selected disabled>Escolha uma opção.</option>
+                        <option value="yes">Sim</option>
+                        <option value="no">Não</option>
+                    </select>
+                </div>
+                @if (emailForm.controls.hasRepetition.value === 'yes') {
+                    <div class="email__option">
+                        <label for="repetions">Deseja que o email se repita quantas vezes?</label>
+                        <input type="number" name="repetions" id="repetions" min="2" max="12" value="2" formControlName="remainginRepetitions">
+                    </div>
+
+                    <div class="email__option">
+                        <label for="email-configuration">Período de tempo entre as repetições</label>
+                        <select 
+                            id="email-configuration" 
+                            name="email-configuration" formControlName="repetitionIntervalDays"
+                        >
+                            <option value="" selected disabled>Escolha uma opção</option>
+                            <option value="30">1 mês</option>
+                            <option value="90">3 meses</option>
+                            <option value="180">6 meses</option>
+                            <option value="365">1 ano</option>
+                            <option value="other">Outro</option>
+                        </select>
+                    </div>
+                    @if (emailForm.controls.repetitionIntervalDays.value === 'other') {
+                        <div class="email__option">
+                            <label for="other-interval">Qual o intervalo entre as repetições em dias?</label>
+                            <input type="number" name="other-interval" id="other-interval" min="1" max="365" formControlName="repetitionIntervalDays">
+                        </div>
+                    }
+
+                    <div class="email__option">
+                        <label for="send-date">Data de envio do primeiro email?</label>
+                        <input type="date" name="send-date" id="send-date" [min]="getMinDate()" formControlName="sendDate">
+                    </div>
+                } @else {
+                    <div class="email__option">
+                        <label for="send-date">Data de envio do único email?</label>
+                        <input type="date" name="send-date" id="send-date" [min]="getMinDate()" formControlName="sendDate">
+                    </div>
+                }
+                
+                
+                
+                <div style="display: flex; align-self: center;">
+                    <p-button label="Enviar" (onClick)="onSubmit()" rounded pRipple/>
+                </div>
+            </div>
+        </section>
+    
+    </section>
+</form>

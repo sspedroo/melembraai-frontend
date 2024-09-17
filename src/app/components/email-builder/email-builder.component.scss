@@ -1,0 +1,47 @@
+.main__container {
+    width: 90%;
+    margin: 1rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 2rem 0;
+    border-radius: 10px;
+    background-color: #f5f5f5;
+}
+
+.email__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.email__field {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    
+}
+
+.email__options {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.email__option {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea, select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+}
+
+label {
+    font-weight: bold;
+}

@@ -2,7 +2,7 @@ import { Component, input, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../shared/header/header.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 import { ButtonModule } from 'primeng/button';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterService } from '../../services/register.service';
 import { FormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ export class ConfirmRegisterComponent implements OnInit {
   userId!: string;
   token!: string;
 
-  constructor(private route: ActivatedRoute, private registerService: RegisterService) {}
+  constructor(private route: ActivatedRoute, private registerService: RegisterService, private router: Router) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       this.userId = params['userId'];
@@ -34,6 +34,7 @@ export class ConfirmRegisterComponent implements OnInit {
     this.registerService.confirmEmail(body).subscribe({
       next: (response: string) => {
         console.log(response);
+        this.router.navigate(['/login']);
       },
       error: (error: any) => {
         console.error(userId)
