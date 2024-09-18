@@ -3,6 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ButtonModule } from 'primeng/button';
 import { SendEmailService } from '../../services/send-email.service';
 import { RegisterEmail } from '../../models/register-email.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-email-builder',
@@ -10,7 +11,7 @@ import { RegisterEmail } from '../../models/register-email.model';
   imports: [ButtonModule, ReactiveFormsModule],
   templateUrl: './email-builder.component.html',
   styleUrl: './email-builder.component.scss',
-  providers: [SendEmailService],
+  providers: [SendEmailService, DatePipe],
 })
 export class EmailBuilderComponent {
   emailForm = new FormGroup({
@@ -34,7 +35,12 @@ export class EmailBuilderComponent {
     }),
   });
 
-  constructor(private sendEmailService: SendEmailService) {}
+  sendSuccessful: boolean = false;
+
+  constructor(
+    private sendEmailService: SendEmailService,
+    private datePipe: DatePipe
+  ) {}
 
   buildEmail(emailForm: FormGroup) {
     const title = emailForm.controls['title'].value;
@@ -55,11 +61,16 @@ export class EmailBuilderComponent {
     }
   }
 
-  getMinDate(): Date {
+  compareDates(): boolean {
     const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    return tomorrow;
+    const sendDate = this.emailForm.controls['sendDate'].value;
+    const sendDateDate = new Date(sendDate!);
+    return sendDateDate <= today;
+  }
+
+  formatDate(date: string): string | null {
+    // Formatar a data usando o DatePipe
+    return this.datePipe.transform(date, 'dd/MM/yyyy');
   }
 
   onSubmit() {
@@ -73,12 +84,14 @@ export class EmailBuilderComponent {
       hasRepetition: form.hasRepetition as unknown as boolean,
       repetitionIntervalDays: form.repetitionIntervalDays as unknown as number,
       remainingRepetitions: form.remainingRepetitions as unknown as number,
-      sendDate: '17/09/2024',
+      sendDate: this.formatDate(form.sendDate!) as string,
     };
 
     this.sendEmailService.registerEmail(registerEmail).subscribe({
       next: (response) => {
-        console.log('Email registered:', response);
+        this.sendSuccessful = true;
+
+        setInterval(() => (this.sendSuccessful = false), 5000);
         emailForm.reset();
       },
       error: (error) => console.error('Error registering email:', error),

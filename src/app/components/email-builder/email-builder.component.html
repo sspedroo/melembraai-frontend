@@ -1,5 +1,11 @@
 <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
-    <section class="main__container">
+        @if (sendSuccessful) {
+            <div class="sucess__message">
+                <p>Email registrado com sucesso! Agora só aguardar :D</p>
+            </div>
+        }
+        
+    <section class="main__container">       
         <div class="email__fields">
             <div style="padding-left: 1rem;">
                 <h2>Escreva seu email</h2>
@@ -27,7 +33,7 @@
                 @if (emailForm.controls.hasRepetition.value === 'yes') {
                     <div class="email__option">
                         <label for="repetions">Deseja que o email se repita quantas vezes?</label>
-                        <input type="number" name="repetions" id="repetions" min="2" max="12" value="2" formControlName="remainginRepetitions">
+                        <input type="number" name="repetions" id="repetions" min="2" max="12" value="2" formControlName="remainingRepetitions">
                     </div>
 
                     <div class="email__option">
@@ -53,12 +59,18 @@
 
                     <div class="email__option">
                         <label for="send-date">Data de envio do primeiro email?</label>
-                        <input type="date" name="send-date" id="send-date" [min]="getMinDate()" formControlName="sendDate">
+                        <input type="date" name="send-date" id="send-date" formControlName="sendDate">
                     </div>
+                    @if (compareDates() === true) {
+                        <div>
+                            A data de envio do primeiro email não pode ser anterior à data atual.
+                        </div>
+                    }
+                    
                 } @else {
                     <div class="email__option">
                         <label for="send-date">Data de envio do único email?</label>
-                        <input type="date" name="send-date" id="send-date" [min]="getMinDate()" formControlName="sendDate">
+                        <input type="date" name="send-date" id="send-date" formControlName="sendDate">
                     </div>
                 }
                 
