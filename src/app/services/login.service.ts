@@ -25,7 +25,7 @@ export class LoginService {
   }
 
   refreshToken(): Observable<LoginResponse> {
-    const refreshToken = this.getRefreshToken();
+    const refreshToken = localStorage.getItem('refreshToken');
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${refreshToken}`

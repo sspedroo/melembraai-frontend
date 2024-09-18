@@ -1,11 +1,12 @@
 import { registerLocaleData } from '@angular/common';
 import { Component, LOCALE_ID, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import localePt from '@angular/common/locales/pt';
 import { HeaderComponent } from "./shared/header/header.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { InfiniteCarouselComponent } from "./components/infinite-carousel/infinite-carousel.component";
+import { LoginService } from './services/login.service';
 
 
 registerLocaleData(localePt);
@@ -20,13 +21,14 @@ registerLocaleData(localePt);
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
-    }
+    },
+    LoginService
   ]
 })
 export class AppComponent implements OnInit {
   title = 'Me Lembra Ai';
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig, private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
     this.primengConfig.ripple = true;
