@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SendEmailService {
-  private readonly apiUrl = `http://localhost:8080/email`;
+  private readonly apiUrl = `https://melembraai.onrender.com/email`;
 
   constructor(private http: HttpClient) {}
 

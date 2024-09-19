@@ -7,7 +7,6 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ConfirmRegisterComponent } from './pages/confirm-register/confirm-register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { LoggedHomeComponent } from './pages/logged-home/logged-home.component';
-import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},// A landing page

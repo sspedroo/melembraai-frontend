@@ -33,12 +33,9 @@ export class ConfirmRegisterComponent implements OnInit {
 
     this.registerService.confirmEmail(body).subscribe({
       next: (response: string) => {
-        console.log(response);
         this.router.navigate(['/login']);
       },
       error: (error: any) => {
-        console.error(userId)
-        console.error(error.message);
       }
     });
 

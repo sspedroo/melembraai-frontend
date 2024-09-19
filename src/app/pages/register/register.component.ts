@@ -67,7 +67,6 @@ export class RegisterComponent {
 
     this.registerService.register(formData as Register).subscribe({
       next: (response: RegisterResponse) => {
-        console.log(response);
         this.form.reset();
         this.router.navigate(['/confirm-email'], { queryParams: { userId: response.id } });
       },
@@ -75,8 +74,6 @@ export class RegisterComponent {
         // Acessar a propriedade "message" dentro do objeto "error"
         if (error.error && error.error.message) {
           this.errorMessage.set(error.error.message);
-        } else {
-          console.error('Erro inesperado:', error);
         }
       },
       complete: () => {

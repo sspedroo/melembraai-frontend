@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RegisterService {
-  private readonly apiUrl = `http://localhost:8080/users/register`;
+  private readonly apiUrl = `https://melembraai.onrender.com/users/register`;
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +17,11 @@ export class RegisterService {
   }
 
   confirmEmail(body: ConfirmEmail): Observable<string> {
-    return this.http.post<string>(`http://localhost:8080/users/${body.userId}/activate?token=${body.token}`, body, { responseType: 'text' as 'json' });
+    return this.http.post<string>(
+      `https://melembraai.onrender.com/users/${body.userId}/activate?token=${body.token}`,
+      body,
+      { responseType: 'text' as 'json' }
+    );
   }
 
   clearLocalStorage() {

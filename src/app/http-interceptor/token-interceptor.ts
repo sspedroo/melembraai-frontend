@@ -22,50 +22,47 @@ export const TokenInterceptor: HttpInterceptorFn = (
   ];
 
   const isPublicEndpoint = (url: string) => {
-    // Remove the base URL if present (adjust as per your environment)
+    // Remove a url base 
     const relativeUrl = url.replace('http://localhost:8080', '');
 
     return publicEndpoints.some((endpoint) => {
-      // Special case for /users/{id}/activate
+      // Analise especial para o endpoint de ativação de usuário
       if (endpoint === '/users/activate') {
         return (
           relativeUrl.startsWith('/users/') && relativeUrl.endsWith('/activate')
         );
       }
-
-      // For other endpoints, check if the relative URL matches the endpoint
+      // Para os outros endpoints, compara a url com os endpoints públicos
       return relativeUrl === endpoint;
     });
   };
 
-  // Check if the current request URL matches any public endpoints, including refresh token
+  // Confiro se a atual url é um endpoint public, incluindo o endpoint de refresh
   if (isPublicEndpoint(req.url)) {
-    console.log('Endpoint público, não é necessário adicionar token');
-    return next(req); // Proceed without token for public endpoints, including refresh
+    return next(req); // continua a requisição sem adicionar token
   }
 
-  // If there's no token or the token is already expired, refresh the token first
+  // Confiro se o token existe e se está expirado
   if (token && loginService.isTokenExpired()) {
-    // Check if the request is already trying to refresh the token to prevent infinite loop
+    // confiro se a url é a de refresh token
     if (req.url.includes('/auth/refresh')) {
-      return next(req); // Skip interceptor for token refresh request
+      return next(req); // se estiver atualizando o token, continua a requisição sem adicionar token
     }
 
-    // Call refresh token logic
-    console.log('Token expirado, atualizando antes de fazer a requisição...');
+    // Se não for refresh token, tenta adquirir um novo token
     return loginService.refreshToken().pipe(
       switchMap((response) => {
-        // Save the new token in localStorage
+        // Salvo a resposta do refresh token no localStorage
         loginService.saveDataInLocalStorage(response);
 
-        // Clone the request with the new token
+        // Clono a requisição com o novo token
         const newRequest = req.clone({
           setHeaders: {
             Authorization: `Bearer ${response.token}`,
           },
         });
 
-        // Proceed with the new request
+        // Continua a requisição com o novo token
         return next(newRequest);
       }),
       catchError((refreshError) => {
@@ -76,12 +73,12 @@ export const TokenInterceptor: HttpInterceptorFn = (
     );
   }
 
-  // If token exists and is not expired, attach it to the request
+  // Se o token existe e não está expirado, adiciona o token ao cabeçalho da requisição
   if (token && !loginService.isTokenExpired()) {
     req = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
-    return next(req); // Proceed with the request
+    return next(req); // Continuo com a requisição com o token atual
   }
 
-  // If no token exists or token can't be refreshed, just continue the request without token
+  // Se o token não existe ou não pode ser atualizado, somente segue com a requisição
   return next(req);
 };

@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LoginService {
-  private readonly apiUrl = `http://localhost:8080/auth/login`;
+  private readonly apiUrl = `https://melembraai.onrender.com/auth/login`;
 
   constructor(private http: HttpClient) {}
 
-  login(body: { email: string; password: string }): Observable<LoginResponse>{
+  login(body: { email: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.apiUrl, body);
   }
-  
+
   saveDataInLocalStorage(response: LoginResponse) {
     localStorage.setItem('token', response.token);
     localStorage.setItem('username', response.username);
@@ -31,7 +31,7 @@ export class LoginService {
       `Bearer ${refreshToken}`
     );
     return this.http.post<LoginResponse>(
-      `http://localhost:8080/auth/refresh`,
+      `https://melembraai.onrender.com/auth/refresh`,
       null,
       { headers }
     );
